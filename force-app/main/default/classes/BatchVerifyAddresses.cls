@@ -26,8 +26,8 @@ public class BatchVerifyAddresses Implements Database.Batchable<npsp__Address__c
         }
         List<npsp__Address__c> addressesToUpdate = new List<npsp__Address__c>();
         
-		String smartyAPIKey = '9340b463-fc5c-99ae-6d3d-c6609c24b85c';
-        String authToken = 'Ev6X60UTDD4lEB1BRgAe';        
+	String smartyAPIKey = '**********************';
+        String authToken = '**************************';        
 
         if (addr.npsp__MailingCountry__c == 'US' || addr.npsp__MailingCountry__c == 'United States' || addr.npsp__MailingCountry__c == 'USA' || addr.npsp__MailingCountry__c == 'U.S.A.' || addr.npsp__MailingCountry__c == 'U.S.') {
             if (!String.isBlank(addr.npsp__MailingStreet__c)) {
