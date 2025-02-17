@@ -1,0 +1,54 @@
+<apex:page standardController="Contact" extensions="NewContactExt" recordSetVar="contacts" lightningStylesheets="true">
+    <apex:slds />
+    <apex:form id="newContactForm">
+        <apex:pageBlock >
+        <apex:pageMessages ></apex:pageMessages>                 
+            <apex:actionStatus id="saveStatus">
+                <div class="slds-scope">
+                <apex:facet name="start">
+                    <div class="slds-spinner_container" style="position: fixed;" >
+                        <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </apex:facet>
+                </div>
+            </apex:actionStatus>           
+            <div style="width:1200px; text-align:center;">
+                <apex:commandButton styleClass="slds-vf-button_brand" action="{!saveContact}" value="Save" status="saveStatus" reRender="newContactForm"/>
+                <apex:commandButton styleClass="slds-vf-button_brand" action="{!cancel}" value="Cancel"/>
+            </div>
+            <br/>
+        <apex:pageBlockSection title="Contact Details">
+            <apex:inputField value="{!con.Salutation}"/>
+            <apex:inputField value="{!con.FirstName}"/>            
+            <apex:inputField value="{!con.MiddleName}"/>
+            <apex:inputField value="{!con.LastName}"/>
+            <apex:inputField value="{!con.Nickname__c}"/>
+            <apex:inputField value="{!con.Gender__c}"/>
+            <apex:inputField value="{!con.npe01__Preferred_Email__c }" label="Preferred Email"/>
+            <apex:inputField value="{!con.npe01__HomeEmail__c}" label="Personal Email"/>
+            <apex:inputField value="{!con.npe01__WorkEmail__c }" label="Work Email"/>
+            <apex:inputField value="{!con.npsp__Do_Not_Contact__c}" label="Do Not Contact"/>
+            <apex:inputField value="{!con.MailingStreet}"/>
+            <apex:inputField value="{!con.MailingCity}"/>
+            <apex:inputField value="{!con.MailingState}"/>
+            <apex:inputField value="{!con.MailingPostalCode}"/>
+            <apex:inputField value="{!con.MailingCountry}"/>
+            <apex:inputField value="{!con.npe01__PreferredPhone__c}" label="Preferred Phone"/>
+            <apex:inputField value="{!con.MobilePhone}"/>
+            <apex:inputField value="{!con.npe01__WorkPhone__c}" label="Work Phone"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Organizational Affiliation (Optional)">
+            <apex:inputField value="{!affiliation.npe5__Organization__c}" label="Organization" required="false"/>
+            <apex:inputField value="{!affiliation.Type__c}" required="false"/>
+            <apex:inputField value="{!affiliation.npe5__Primary__c}" label="Primary"/>             
+        </apex:pageBlockSection>
+            <div style="width:1200px; text-align:center;">
+                <apex:commandButton styleClass="slds-vf-button_brand" action="{!saveContact}" value="Save" status="saveStatus" reRender="newContactForm"/>
+                <apex:commandButton styleClass="slds-vf-button_brand" action="{!cancel}" value="Cancel"/>
+            </div>        
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

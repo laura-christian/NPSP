@@ -1,0 +1,75 @@
+<template>
+    <lightning-quick-action-panel header="Convert Lead">
+        <template if:true={isLoading}>
+            <div>
+                <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+            </div>
+        </template>
+        <lightning-combobox
+          class ="convertOptionSelector"
+          name="Lead conversion options"
+          label="Lead conversion options:"
+          value={selectedOption}
+          placeholder="Select an option..."
+          options={conversionOptions}
+          onchange={handleConversionOptionSelection}
+          required="true">
+        </lightning-combobox> 
+        <br/>    
+        <c-custom-lookup
+          label="Contact into which to merge lead:"
+          disabled={contactLookupDisabled}
+          s-object-api-name="Contact"
+          other-field-api-name="Email"
+          icon-name="standard:contact"
+          placeholder="Search for contact..."
+          onvalueselected={handleValueSelectedContact}
+          onvaluedeselected={handleValueDeselectedContact}>
+        </c-custom-lookup>                      
+        <br/> 
+        <c-custom-lookup
+          label="Household to which to add converted lead:"
+          disabled={householdLookupDisabled}
+          s-object-api-name="Account"
+          other-field-api-name="BillingCountry"
+          icon-name="standard:home"
+          placeholder="Search for household..."
+          filter-field="RecordTypeId"
+          filter-value="0128b000000XLomAAG"
+          onvalueselected={handleValueSelectedHouseholdAcct}
+          onvaluedeselected={handleValueDeselectedHouseholdAcct}>
+        </c-custom-lookup>
+        <br/>      
+        <c-custom-lookup
+          label="Affiliate organization (optional):"
+          s-object-api-name="Account"
+          other-field-api-name="BillingCountry"
+          icon-name="standard:account"
+          placeholder="Search for organization..."
+          filter-field="RecordTypeId"
+          filter-value="0128b000000XLonAAG"
+          onvalueselected={handleValueSelectedAffiliateOrg}
+          onvaluedeselected={handleValueDeselectedAffiliateOrg}>
+        </c-custom-lookup>
+        <br/>
+        <lightning-combobox
+          class="affiliationTypeSelector"        
+          label="Affiliation type:"
+          required={affiliateOrgSelected}
+          value={affiliationType}
+          placeholder="Select an option..."
+          options={affiliationTypes}
+          onchange={handleSelectionAffiliationType}>
+        </lightning-combobox>
+        <br/>
+        <lightning-input
+          type="checkbox"
+          value={primaryAffiliation}
+          label="Primary affiliation">
+        </lightning-input>              
+        <div slot="footer">
+          <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+          <lightning-button variant="brand" label="Submit" type="submit" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

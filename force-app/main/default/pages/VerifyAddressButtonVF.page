@@ -1,0 +1,2 @@
+<apex:page standardController="npsp__Address__c" extensions="VerifyAddressExt" action="{!verifyAddress}">
+</apex:page>

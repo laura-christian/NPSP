@@ -1,0 +1,2 @@
+<apex:page standardController="Campaign" extensions="CRMSegmentPushExt" action="{!sendCRMSegmentToEN}">
+</apex:page>

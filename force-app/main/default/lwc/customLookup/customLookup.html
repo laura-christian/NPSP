@@ -1,0 +1,78 @@
+<template>
+  <div class="slds-form-element">
+    <div class="slds-form-element__control">
+      <div class="slds-combobox_container" if:false={isValueSelected}>
+          <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+              <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                  <lightning-input                   
+                    type="search"
+                    onchange={handleKeyChange}
+                    onfocus={handleFocus}
+                    onblur={handleInputBlur}
+                    is-loading={loading}
+                    value={searchKey}
+                    label={label}
+                    placeholder={placeholder}
+                    disabled={disabled}>
+                  </lightning-input> 
+                </div>
+              </div>
+            </div>
+            <template if:true={records}>
+                <div onblur={handleBlur} onmousedown={handleMouseDown} class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">    
+                <template for:each={records} for:item="record">
+                    <li key={record.Id} role="presentation" class="slds-listbox__item">
+                        <div onclick={handleSelect} data-id={record.id} data-name={record.name}
+                        data-detail={record.detail}
+                        class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                        role="option">
+                          <span class="slds-media__figure slds-listbox__option-icon">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={iconName} size="small"></lightning-icon>
+                            </span>
+                          </span>
+                          <span class="slds-media__body">
+                            <span class="slds-listbox__option-text slds-listbox__option-text_entity">{record.name}</span>
+                            <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">{sObjectApiName} • {record.detail}</span>
+                          </span>
+                        </div>
+                      </li>                    
+                </template>
+                </ul>
+                </div>
+            </template>
+            <template if:true={isValueSelected}>
+                <label class="slds-form-element__label" for="combobox-id-5" id="combobox-label-id-35">{label}</label>
+                <template if:true={required}>
+                    <span style="color:red">*</span>
+                </template>
+                <div tabindex="0" class="slds-combobox_container slds-has-selection">
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right"
+                            role="none">
+                            <span
+                                class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon"
+                                title="Account">
+                                <lightning-icon icon-name={iconName} alternative-text={iconName}
+                                    size="x-small"></lightning-icon>
+                            </span>
+                            <button type="button"
+                                class="slds-input_faux slds-combobox__input slds-combobox__input-value"
+                                aria-labelledby="combobox-label-id-34 combobox-id-5-selected-value"
+                                id="combobox-id-5-selected-value" aria-controls="listbox-id-5" aria-expanded="false"
+                                aria-haspopup="listbox">
+                                <span class="slds-truncate" id="combobox-value-id-19">{selectedRecordName}</span>
+                            </button>
+                            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                                title="Remove selected option" onclick={handleDeselect}>
+                                <lightning-icon icon-name="utility:close" alternative-text="Remove selected option"
+                                    size="x-small"></lightning-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

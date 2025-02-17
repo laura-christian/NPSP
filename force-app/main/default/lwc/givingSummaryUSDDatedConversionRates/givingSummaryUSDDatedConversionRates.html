@@ -1,0 +1,130 @@
+<template>
+    <template if:true={givingSummary.data}>
+        <article class="slds-card">
+            <div class="slds-grid slds-card__header slds-theme_shade slds-border_bottom">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div style="margin-bottom: 10px; white-space: nowrap; overflow: hidden;">
+            <div class="slds-grid slds-grid_vertical-align-center slds-size_3-of-4 slds-medium-size_2-of-3">
+            <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-utility-salesforce1">
+                <lightning-icon icon-name="utility:currency" alternative-text="currency" title="currency"></lightning-icon>
+            </span>
+            </div>
+            <div class="slds-media__body">
+            <h2 class="slds-card__header-title">   
+                <span>Giving Summary in USD</span>
+            </h2>
+            </div>
+            </div>
+            </div>
+            </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Total Credits:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.totalCredits} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Credits This Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.creditsThisYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Credits Last Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.creditsLastYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div> 
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Credits Two Years Ago:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.creditsTwoYearsAgo} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>                         
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Total Gifts:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.totalGifts} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Gifts This Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.giftsThisYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>   
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Gifts Last Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.giftsLastYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div> 
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Gifts Two Years Ago:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.giftsTwoYearsAgo} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div> 
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Total Soft Credits:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.totalSoftCredits} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>  
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Total P2P Soft Credits:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.totalP2PSoftCredits} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div> 
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Soft Credits This Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.softCreditsThisYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div> 
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Soft Credits Last Year:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.softCreditsLastYear} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-2">
+                <span class="slds-float_right"><strong>Credits Two Years Ago:</strong></span>
+                </div>
+                <div class="slds-col slds-size_2-of-2">
+                <span><lightning-formatted-number value={givingSummary.data.softCreditsTwoYearsAgo} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                </div>
+                </div>
+            </div>            
+        </article>
+    </template>    
+</template>

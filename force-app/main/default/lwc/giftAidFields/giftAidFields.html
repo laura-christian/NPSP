@@ -1,0 +1,56 @@
+<template>
+  <article class="slds-card">
+    <div class="slds-page-header slds-border_bottom slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+            <lightning-icon icon-name="standard:opportunity" alternative-text="Opportunity" title="Opportunity"></lightning-icon>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title">
+              <span>Gift Aid Fields</span>
+          </h2>
+        </div>
+      </header>
+    </div>
+    <div class="slds-card__body slds-card__body_inner">      
+      <lightning-record-edit-form
+      record-id={recordId}
+      object-api-name={objectApiName}
+      onsuccess={handleSuccess}>
+        <lightning-messages> </lightning-messages>
+        <lightning-output-field field-name="gcga__Gift_Aidable_Amount__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Non_Gift_Aidable_Amount__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Gift_Aid_Amount__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Gift_Aid_Declaration__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Gift_Aid_Claim__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Gift_Aid_Schedule_Name__c"></lightning-output-field>
+        <lightning-output-field field-name="Payment_Method__c"></lightning-output-field>
+        <lightning-output-field field-name="Is_Payment_Method_Gift_Aid_Eligible__c"></lightning-output-field>
+        <lightning-output-field field-name="Is_Donation_RecordType_Gift_Aid_Eligible__c"></lightning-output-field>
+        <lightning-output-field field-name="gcga__Is_a_donation_for_Gift_Aid__c"></lightning-output-field>        
+        <lightning-input-field field-name="Is_Gift_Aid_Eligible__c"></lightning-input-field>
+        <lightning-input-field field-name="gcga__Is_Gift_Aid_Excluded__c"></lightning-input-field>
+        <lightning-input-field field-name="gcga__Gift_Aid_Invalid__c"></lightning-input-field>
+        <lightning-input-field field-name="gcga__Gift_Aid_Status__c"></lightning-input-field>
+      </lightning-record-edit-form>
+    </div>
+    <template if:true={isLoading}>
+    <div class="slds-spinner slds-spinner_small">
+      <span class="slds-assistive-text">Loading</span>
+      <div class="slds-spinner__dot-a"></div>
+      <div class="slds-spinner__dot-b"></div>
+    </div>
+  </template>
+    <footer class="slds-card__footer">
+      <lightning-button
+      onclick={handleClick}
+      variant="brand"
+      type="submit"
+      name="Update"
+      label="Update">
+      </lightning-button> 
+    </footer>    
+  </article>    
+</template>

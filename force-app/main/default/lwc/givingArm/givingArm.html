@@ -1,0 +1,90 @@
+<template>
+	<article class="slds-card">
+		<div class="slds-page-header slds-border_bottom slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<div class="slds-media__figure">
+					<span class="slds-icon_container slds-icon-standard-thanks" title="thanks">
+						<lightning-icon icon-name="standard:thanks" alternative-text="thanks" title="thanks"></lightning-icon>
+					</span>
+				</div>
+				<div class="slds-media__body">
+					<h2 class="slds-card__header-title">
+						<div class="slds-card__header-link slds-truncate" title="Giving Arm(s)">Giving Arm(s)</a></div>
+					</h2>
+				</div>
+			</header>
+		</div>
+		<div class="slds-card__body slds-card__body_inner">
+			<ul class="slds-grid slds-wrap slds-grid_pull-padded">  
+				<div class="slds-m-around_medium">
+					<template for:each={deepCloneData} for:item="givingArm">
+						<li class="slds-p-horizontal_small slds-size_1-of-1" key={givingArm.Id}>
+							<article class="slds-tile slds-media">
+								<div class="slds-media__figure">
+									<span class="slds-icon_container" title="person account">
+										<lightning-icon icon-name="standard:person_account" size="small" alternative-text="person_account" title="person_account"></lightning-icon>
+									</span>
+								</div>
+								<div class="slds-media__body">
+									<h3 class="slds-tile__title slds-truncate slds-truncate_container_50" title="Giving Arm(s)">
+										<a href="" onclick={viewGivingArm} data-id={givingArm.Id}>{givingArm.Name}</a>
+									</h3>
+									<div class="slds-tile__detail">
+										<dl class="slds-list_horizontal slds-wrap">
+											<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Total Gifts">Total Gifts:</dt>
+											<template lwc:if={givingArm.acctCurrencyIsJPY}>
+												<dd class="slds-item_detail slds-truncate" title="Total Gifts">{givingArm.CurrencyIsoCode} <lightning-formatted-number value={givingArm.npo02__TotalOppAmount__c} format-style="decimal" minimum-fraction-digits="0" maximum-fraction-digits="0"></lightning-formatted-number></dd>
+											</template>
+											<template lwc:else>
+												<dd class="slds-item_detail slds-truncate" title="Total Gifts">{givingArm.CurrencyIsoCode} <lightning-formatted-number value={givingArm.npo02__TotalOppAmount__c} format-style="decimal" minimum-fraction-digits="2" maximum-fraction-digits="2"></lightning-formatted-number></dd>
+											</template>
+										</dl>
+									</div>
+								</div>
+							</article>							
+						</li>
+						<ul class="slds-grid slds-wrap slds-grid_pull-padded" key={givingArm.Id}>  
+							<div class="slds-m-around_medium">
+								<template lwc:if={givingArm.Opportunities}>
+								<template for:each={givingArm.Opportunities} for:item="opp">
+									<li class="slds-p-bottom_small slds-p-left_medium slds-size_1-of-1" key={opp.Id}>
+										<article class="slds-tile slds-media">
+											<div class="slds-media__figure">
+												<span class="slds-icon_container" title="opportunity">
+													<lightning-icon icon-name="standard:opportunity" size="small" alternative-text="opportunity" title="opportunity"></lightning-icon>
+												</span>
+											</div>
+											<div class="slds-media__body">
+												<h3 class="slds-tile__title slds-truncate slds-truncate_container_50" title="Opportunity">
+													<a href="" onclick={viewOpp} data-id={opp.Id}>{opp.Name}</a>
+												</h3>
+												<div class="slds-tile__detail">
+													<dl class="slds-list_horizontal slds-wrap">
+														<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Amount">Amount:</dt>
+														<template lwc:if={opp.oppCurrencyIsJPY}>
+															<dd class="slds-item_detail slds-truncate" title="Amount">{opp.CurrencyIsoCode} <lightning-formatted-number value={opp.Amount} format-style="decimal" minimum-fraction-digits="0" maximum-fraction-digits="0"></lightning-formatted-number></dd>
+														</template>
+														<template lwc:else>
+															<dd class="slds-item_detail slds-truncate" title="Amount">{opp.CurrencyIsoCode} <lightning-formatted-number value={opp.Amount} format-style="decimal" minimum-fraction-digits="2" maximum-fraction-digits="2"></lightning-formatted-number></dd>
+														</template>
+														<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Close Date">Close Date:</dt>
+														<dd class="slds-item_detail slds-truncate" title="Close Date">{opp.CloseDate}</dd>
+														<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Stage">Probability:</dt>
+														<dd class="slds-item_detail slds-truncate" title="Stage">{opp.Probability}%</dd>														
+														<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Owner">Owner:</dt>
+														<dd class="slds-item_detail slds-truncate" title="Stage"><a href="" onclick={viewRMUserRecord} data-id={opp.OwnerId}>{opp.Owner.Name}</a></dd>														
+													</dl>
+												</div>
+											</div>
+										</article>
+									</li> 
+								</template>
+								</template>
+							</div>
+						</ul>                    
+					</template>
+				</div>
+			</ul>
+		</div>
+	</article>
+</template>

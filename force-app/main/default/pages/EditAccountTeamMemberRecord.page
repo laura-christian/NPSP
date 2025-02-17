@@ -1,0 +1,55 @@
+<apex:page >
+   <html>
+      <head>
+         <apex:includeLightning />
+      </head>
+      <body class="slds-scope">
+         <div id="flowContainer" />
+         <script>
+            var statusChange = function(event) {
+               if (event.getParam("status") === "FINISHED") {
+                  // Control what happens when the interview finishes
+                  var outputVariables = event.getParam("outputVariables");
+                  var recordId;
+                  for (key in outputVariables) {
+                     if (outputVariables[key].name === "varAcctId" && outputVariables[key].value != null) {
+                         acctId = outputVariables[key].value;
+                         console.log(acctId);
+                     }
+                  }
+                  var url = window.location.host;
+                  var myDomain = url.substring(url.indexOf('//')+1, url.indexOf('--c'));
+                  console.log(myDomain);
+                  var redirectURL = window.location.protocol + '//' + myDomain + '.lightning.force.com/lightning/r/Account/' + acctId + '/related/AccountTeamMembers/view';
+                  window.location.href = redirectURL;                      
+               }
+            };          
+            $Lightning.use("c:LightningFlowApp", function() {
+               // Create the flow component and set the onstatuschange attribute
+               $Lightning.createComponent("lightning:flow", {"onstatuschange":statusChange},
+                  "flowContainer",
+                  function (component) {
+                     var queryString = window.location.search;
+                     var urlParams = new URLSearchParams(queryString);
+                     var atmID = urlParams.get('varATMId');
+                     console.log(atmID);
+                     // Set the input variables
+                     var inputVariables = [
+                        {
+                           name : 'varATMId',
+                           type : 'String',
+                           value : atmID
+                        }
+                                             
+                     ];
+                     
+                     // Start an interview in the flowContainer div, and 
+                     // initialize the input variables.
+                     component.startFlow("Account_Team_Member_Edit_Record", inputVariables);
+                  }
+               );
+            });
+         </script>
+      </body>
+   </html>
+</apex:page>

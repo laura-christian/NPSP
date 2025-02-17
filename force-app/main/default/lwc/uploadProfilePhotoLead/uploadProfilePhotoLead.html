@@ -1,0 +1,44 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-page-header slds-border_bottom slds-grid">
+          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+              <span class="slds-icon_container slds-icon-standard-person_name" title="profile photo">
+                <lightning-icon icon-name="action:add_photo_video" size="x-small" alternative-text="Profile Photo" title="Profile Photo"></lightning-icon>
+              </span>
+            </div>
+            <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                    Profile Photo
+                </h2>                
+            </div>
+            <template if:true={profilePhotoUploaded}>
+            <div class="slds-no-flex">
+                <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete" onclick={handleDelete}></lightning-button-icon>
+            </div>
+            </template>  
+          </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-m-around_medium slds-align_absolute-center">
+                <template if:true={isLoading}>
+                  <div>
+                    <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+                  </div>
+                </template>                
+                <template if:false={profilePhotoUploaded}>
+                <lightning-file-upload 
+                    name="fileUploader"
+                    accept="['.jpg', '.png']"
+                    record-id={recordId}
+                    onuploadfinished={handleUploadFinished}
+                    multiple>
+                </lightning-file-upload>
+                </template>
+                <template if:true={profilePhotoUploaded}>
+                    <img src={photoURL}/>
+                </template>               
+            </div>
+        </div>
+    </article>
+</template>

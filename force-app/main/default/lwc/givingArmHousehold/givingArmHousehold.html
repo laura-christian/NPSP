@@ -1,0 +1,58 @@
+<template>
+	<article class="slds-card">
+		<div class="slds-page-header slds-border_bottom slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<div class="slds-media__figure">
+					<span class="slds-icon_container slds-icon-standard-thanks" title="thanks">
+						<lightning-icon icon-name="standard:thanks" alternative-text="thanks" title="thanks"></lightning-icon>
+					</span>
+				</div>
+				<div class="slds-media__body">
+					<h2 class="slds-card__header-title">
+						<div class="slds-card__header-link slds-truncate" title="If you are the RM on the household related to this giving arm, there is no need to make yourself an account team member on both; you will automatically be added as an opportunity team member to any gifts that pass through this account and be credited accordingly.">Related Donor Household(s)</div>
+					</h2>
+				</div>
+			</header>
+		</div>
+		<div class="slds-card__body slds-card__body_inner">
+			<ul class="slds-grid slds-wrap slds-grid_pull-padded">  
+				<div class="slds-m-around_medium">
+					<template for:each={deepCloneData} for:item="household">
+						<li class="slds-p-bottom_medium slds-size_1-of-1" key={household.Id}>
+							<article class="slds-tile slds-media">
+								<div class="slds-media__figure">
+									<span class="slds-icon_container" title="custom107">
+										<lightning-icon icon-name="custom:custom107" size="small" alternative-text="custom107" title="custom107"></lightning-icon>
+									</span>
+								</div>
+								<div class="slds-media__body">
+									<h3 class="slds-tile__title slds-truncate slds-truncate_container_75" title="Related Donor Household(s)">
+										<a href="" onclick={viewHousehold} data-id={household.Id}>{household.Name}</a>
+									</h3>
+									<div class="slds-tile__detail">
+										<dl class="slds-list_horizontal slds-wrap">
+											<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Current RM">Current RM:</dt>
+											<template lwc:if={household.Current_Relationship_Manager__c}>
+												<dd class="slds-item_detail slds-truncate" title="Current RM"><a href="" onclick={viewRMUserRecord} data-id={household.Current_Relationship_Manager__c}>{household.Current_Relationship_Manager__r.Name}</a></dd>												
+											</template>
+											<template lwc:else>
+												<dd class="slds-item_detail slds-truncate"></dd>
+											</template>
+											<dt class="slds-item_label slds-text-color_weak slds-truncate" title="Total Credits">Total Credits:</dt>
+											<template lwc:if={household.acctCurrencyIsJPY}>
+												<dd class="slds-item_detail slds-truncate" title="Total Credits">{household.CurrencyIsoCode} <lightning-formatted-number value={household.Total_Credits__c} format-style="decimal" minimum-fraction-digits="0" maximum-fraction-digits="0"></lightning-formatted-number></dd>
+											</template>
+											<template lwc:else>
+												<dd class="slds-item_detail slds-truncate" title="Total Credits">{household.CurrencyIsoCode} <lightning-formatted-number value={household.Total_Credits__c} format-style="decimal" minimum-fraction-digits="2" maximum-fraction-digits="2"></lightning-formatted-number></dd>
+											</template>
+										</dl>
+									</div>
+								</div>
+							</article>							
+						</li>                
+					</template>
+				</div>
+			</ul>
+		</div>
+	</article>
+</template>
